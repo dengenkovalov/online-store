@@ -26,7 +26,7 @@ class DeviceController {
 
     async getAll(req, res) {
         let {brandId, typeId, limit, page} = req.query
-        limit = limit || 6
+        limit = limit || 9
         page = page || 1
         let offset = page * limit - limit
         let devices;

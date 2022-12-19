@@ -31,7 +31,8 @@ class UserController {
     }
 
     async login(req, res, next) {
-        const {email, password} = req.body
+        try {
+            const {email, password} = req.body
         const user = await User.findOne({where: {email}})
         if (!user) {
             return next(ApiError.badRequest('Пользователь с таким email не найден!'))
@@ -43,7 +44,11 @@ class UserController {
         }
 
         const token = generateJwt(user.id, user.email, user.role)
-        return res.json({token})                    
+        return res.json({token})        
+        } catch (error) {
+            return next(ApiError.internalError('Неправильный запрос!'))
+        }
+                    
     }
 
     async check(req, res, next) {

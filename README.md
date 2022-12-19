@@ -1,5 +1,8 @@
 # online-store
-It's my training pet project.
+It's my second training pet project.
+
 It's from video on Youtube.
-The aim is to repeat and understand.
+### Step 1 = Done
+To repeat and understand 
+### Step 2
 Then I'm going to improve it by adding some features (basket, raiting, deleting, errors, history)
