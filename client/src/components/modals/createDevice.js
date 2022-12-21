@@ -1,9 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import {Col, Dropdown, Row, Button, Form, Modal} from "react-bootstrap";
 import {Context} from "../../index";
-import {Col, Dropdown, Row} from "react-bootstrap";
 import {createDevice, fetchBrands, fetchTypes} from "../../http/deviceAPI";
 import {observer} from "mobx-react-lite";
 
@@ -31,12 +28,12 @@ const CreateDevice = observer(({show, onHide}) => {
         setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
     }
 
-    const selectFile = e => {
-        setFile(e.target.files[0])
+    const selectFile = event => {
+        setFile(event.target.files[0])
     }
 
     const addDevice = () => {
-        const formData = new FormData
+        const formData = new FormData()
         formData.append('name', name)
         formData.append('price', `${price}`)
         formData.append('img', file)

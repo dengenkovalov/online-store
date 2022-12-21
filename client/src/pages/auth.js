@@ -23,10 +23,9 @@ const Auth = observer(() => {
                 data = await registration(email, password)
             }
             user.setUser(data)
-            user.setIsAuth(true)
             navigate(SHOP_ROUTE)
-        } catch (e) {
-            alert(e.response.data.message)
+        } catch (err) {
+            alert(err.response.data.message)
         }
     }
 
@@ -42,13 +41,13 @@ const Auth = observer(() => {
                         className="mt-3"
                         placeholder="Введите Ваш email..."
                         value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={event => setEmail(event.target.value)}
                     />
                     <Form.Control
                         className="mt-3"
                         placeholder="Введите Ваш пароль..."
                         value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={event => setPassword(event.target.value)}
                         type="password"
                     />
                 </Form>
