@@ -13,6 +13,7 @@ const Auth = observer(() => {
     const isLogin = location.pathname === LOGIN_ROUTE
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
 
     const click = async () => {
         try {
@@ -20,9 +21,10 @@ const Auth = observer(() => {
             if (isLogin) {
                 data = await login(email, password)
             } else {
-                data = await registration(email, password)
+                data = await registration(email, password, name)
             }
             user.setUser(data)
+            console.log(data)
             navigate(SHOP_ROUTE)
         } catch (err) {
             alert(err.response.data.message)
@@ -43,6 +45,18 @@ const Auth = observer(() => {
                         value={email}
                         onChange={event => setEmail(event.target.value)}
                     />
+                    { isLogin ?
+                        <></>
+                        :
+                        <>
+                            <Form.Control
+                                className="mt-3"
+                                placeholder="Введите Ваше имя..."
+                                value={name}
+                                onChange={event => setName(event.target.value)}
+                            />
+                        </>
+                    }
                     <Form.Control
                         className="mt-3"
                         placeholder="Введите Ваш пароль..."
