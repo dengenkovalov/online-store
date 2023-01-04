@@ -43,6 +43,9 @@ class UserController {
                 return next(ApiError.badRequest('Неправильный пароль!'))
             }
 
+            // TODO: Add counting basket devices
+            //       and return to client to show in Basket button
+
             const token = generateJwt(user.id, user.email, user.role, user.name)
             return res.json({token})
         } catch (error) {

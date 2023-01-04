@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {Row} from "react-bootstrap";
+import Row from "react-bootstrap/Row";
 import DeviceItem from "./deviceItem";
 
 const DeviceList = observer(() => {
@@ -9,8 +9,8 @@ const DeviceList = observer(() => {
 
     return (
         <Row>
-            {device.devices.map(device =>
-                <DeviceItem key={device.id} device={device}/>
+            {device.devices.map(item =>
+                <DeviceItem key={item.id} device={item}/>
             )}
         </Row>
     );

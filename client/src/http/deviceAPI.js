@@ -36,3 +36,23 @@ export const fetchOneDevice = async (id) => {
     const {data} = await $host.get('api/device/' + id)
     return data
 }
+
+export const addBasketDevice = async (userId, deviceId, devicePrice) => {
+    const {data} = await $authHost.post('api/basket', {userId, deviceId, devicePrice})
+    return data
+}
+
+export const deleteBasketDevice = async (basketId, deviceId) => {
+    const {data} = await $authHost.delete('api/basket', {data: {basketId, deviceId}})
+    return data
+}
+
+export const changeQuantity = async (basketId, deviceId, quantity, sum) => {
+    const {data} = await $authHost.put('api/basket', {basketId, deviceId, quantity, sum})
+    return data
+}
+
+export const fetchBasket = async (userId) => {
+    const {data} = await $authHost.get('api/basket', {params: {userId}})
+    return data
+}

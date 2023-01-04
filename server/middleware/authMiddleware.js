@@ -6,9 +6,10 @@ module.exports = function (req, res, next) {
     }
     
     try {
+        // FIXME: Error 401 without authorization
         const token = req.headers.authorization.split(' ')[1]
         if (!token) {
-            return res.status(401).json({message: "Не выполнена авторизация!!!"})          
+            return res.status(401).json({message: "Не выполнена авторизация!!!"})
         }
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY)

@@ -6,9 +6,12 @@ import {createType} from "../../http/deviceAPI";
 
 const CreateType = ({show, onHide}) => {
     const [value, setValue] = useState('')
+    const [item, setItem] = useState('')
+
     const addType = () => {
-        createType({name: value}).then(data => {
+        createType({name: value, item: item}).then(() => {
             setValue('')
+            setItem('')
             onHide()
         })
     }
@@ -28,9 +31,16 @@ const CreateType = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Form.Control
+                        className="mt-2 mb-2"
                         value={value}
                         onChange={event => setValue(event.target.value)}
                         placeholder={'Введите название типа'}
+                    />
+                    <Form.Control
+                        className="mt-2 mb-2"
+                        value={item}
+                        onChange={event => setItem(event.target.value)}
+                        placeholder={'Введите название экземпляра'}
                     />
                 </Form>
             </Modal.Body>

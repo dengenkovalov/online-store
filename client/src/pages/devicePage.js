@@ -1,20 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import bigStar from '../assets/bigstar.png'
-import {useParams} from 'react-router-dom'
-import {fetchOneDevice} from "../http/deviceAPI";
+import {useNavigate, useParams} from 'react-router-dom'
+import {addBasketDevice, fetchOneDevice} from "../http/deviceAPI";
+import {Context} from "../index";
+import {BASKET_ROUTE} from "../utils/consts";
 
 const DevicePage = () => {
+    const {user} = useContext(Context)
     const [device, setDevice] = useState({info: []})
     const {id} = useParams()
-    // console.log(device.img)
+    const navigate = useNavigate()
 
     useEffect( () => {
         fetchOneDevice(id).then(data => setDevice(data))
-        }, []
+        }, [id]
     )
+
+    const addToBasket = () => {
+        addBasketDevice(user.isUser.id, device.id, device.price)
+            .then(() => navigate(BASKET_ROUTE))
+    }
+
     const pathURL = process.env.REACT_APP_API_URL + '/' + device.img
-    // console.log(pathURL)
 
     return (
         <Container className="mt-4">
@@ -38,8 +46,14 @@ const DevicePage = () => {
                         className="d-flex flex-column align-items-center justify-content-around"
                         style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
                     >
-                        <h3>От: {device.price} руб.</h3>
-                        <Button variant={'outline-dark'}>Добавить в корзину</Button>
+                        <h3>{device.price} руб.</h3>
+                        { user.isAuth ?
+                            <Button variant={'outline-dark'} onClick={addToBasket}>
+                                Добавить в корзину
+                            </Button>
+                            :
+                            <></>
+                        }
                     </Card>
                 </Col>
             </Row>

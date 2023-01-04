@@ -1,12 +1,14 @@
 import {makeAutoObservable} from 'mobx';
 
-export default class UserStore {
+export default class DeviceStore {
     constructor() {
         this._types = []
         this._brands = []
         this._devices = []
+        this._basketDevices = []
         this._page = 1
         this._totalCount = 0
+        this._totalSum = 0
         this._limit = 4
         this._selectedType = {}
         this._selectedBrand = {}
@@ -20,6 +22,7 @@ export default class UserStore {
     }
 
     setBrands(brands) {
+        this.setPage(1)
         this._brands = brands
     }
 
@@ -42,6 +45,14 @@ export default class UserStore {
 
     setTotalCount(count) {
         this._totalCount = count
+    }
+
+    setTotalSum(sum) {
+        this._totalSum = sum
+    }
+
+    setBasketDevices(devices) {
+        this._basketDevices = devices
     }
 
     get types() {
@@ -74,5 +85,13 @@ export default class UserStore {
 
     get limit() {
         return this._limit
+    }
+
+    get basketDevices() {
+        return this._basketDevices
+    }
+
+    get totalSum() {
+        return this._totalSum
     }
 }

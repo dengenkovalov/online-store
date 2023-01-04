@@ -24,7 +24,6 @@ const Auth = observer(() => {
                 data = await registration(email, password, name)
             }
             user.setUser(data)
-            console.log(data)
             navigate(SHOP_ROUTE)
         } catch (err) {
             alert(err.response.data.message)
